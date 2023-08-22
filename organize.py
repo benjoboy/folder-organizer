@@ -8,7 +8,7 @@ path = sys.argv[1]
 #onlyfiles = [f for f in listdir(mypath) if isfile(join(mypath, f))]
 
 dirs = ['Downloaded_images', 'Downloaded_compressed', 'Downloaded_text',
-        'Downloaded_pdfs', 'Downloaded_torrents', 'Downloaded_data', 'Downloaded_videos']
+        'Downloaded_pdfs', 'Downloaded_torrents', 'Downloaded_data', 'Downloaded_videos', 'Downloaded_html']
 
 for dir in dirs:
     if not exists(join(path, dir)):
@@ -21,16 +21,16 @@ for f in listdir(path):
         splited = f.split('.')
         extension = splited[len(splited)-1]
         match extension:
-            case 'exe' | 'png' | 'crdownload' | 'log' | 'msi' | 'parts' | 'apk' | 'jar' | 'iso' | 'MSI':
+            case 'exe' | 'crdownload' | 'log' | 'msi' | 'parts' | 'apk' | 'jar' | 'iso' | 'MSI' | 'bak':
                 remove(join(path, f))
                 print('Removed file: ' + f)
-            case 'png' | 'jpg' | 'svg' | 'webp' | 'jpeg' | 'jfif' | 'pjpeg' | 'gif' | 'bmp' | 'ico' | 'tiff' | 'tif' | 'PNG':
+            case 'png' | 'jpg' | 'svg' | 'webp' | 'jpeg' | 'jfif' | 'pjpeg' | 'gif' | 'bmp' | 'ico' | 'tiff' | 'tif' | 'PNG' | 'gltf':
                 move(join(path, f), join(path, 'Downloaded_images', f))
                 print('moved ' + f + ' to Downloaded_images')
             case 'zip' | '7z' | 'rar' | 'tar.gz':
                 move(join(path, f), join(path, 'Downloaded_compressed', f))
                 print('moved ' + f + ' to Downloaded_compressed')
-            case 'docx' | 'doc' | 'odt' | 'txt' | 'xml' | 'csv' | 'xlsx' | 'ppt' | 'ppsx' | 'pptx' | 'ods':
+            case 'docx' | 'doc' | 'odt' | 'txt' | 'xml' | 'csv' | 'xlsx' | 'ppt' | 'ppsx' | 'pptx' | 'ods' | 'xls' | 'txt' | 'gz' | 'md':
                 move(join(path, f), join(path, 'Downloaded_text', f))
                 print('moved ' + f + ' to Downloaded_text')
             case 'pdf' | 'epubs' | 'mobi' | 'epub':
@@ -39,9 +39,12 @@ for f in listdir(path):
             case 'torrent':
                 move(join(path, f), join(path, 'Downloaded_torrents', f))
                 print('moved ' + f + ' to Downloaded_torrent')
-            case 'json' | 'js' | 'cpp' | 'gpx' | 'bat' | 'ged' | 'py' | 'h' | 'sql':
+            case 'json' | 'js' | 'cpp' | 'gpx' | 'bat' | 'ged' | 'py' | 'h' | 'sql' | 'php':
                 move(join(path, f), join(path, 'Downloaded_data', f))
                 print('moved ' + f + ' to Downloaded_data')
-            case 'webm':
+            case 'webm' | 'mp4':
                 move(join(path, f), join(path, 'Downloaded_videos', f))
                 print('moved ' + f + ' to Downloaded_videos')
+            case 'html':
+                move(join(path, f), join(path, 'Downloaded_html', f))
+                print('moved ' + f + ' to Downloaded_html')
